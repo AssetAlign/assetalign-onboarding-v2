@@ -987,8 +987,20 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
       <button class="btn-p" onclick="buildAndGoQuestions()">Answer a few quick questions →</button>
       <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: de-emphasize "advisor
          match" language throughout S8-S10, same "plan" flavor as the rest
-         of the redesign. Function calls unchanged (still showPoints()/etc). -->
-      <button class="btn-ghost" onclick="showPoints()">Skip ahead to my plan</button>
+         of the redesign.
+         2026-09-15 follow-up, per Alex: "i think now we want to introduce
+         my financial life before we introduce the financial advisor..
+         push the advisor part to after the tutorial part on the
+         dashboard." Now calls skipAdvisorForNow() directly instead of
+         showPoints() -- reuses the real off-ramp already built for S12
+         (sets advisor_skipped=1, hands off to the dashboard, which
+         already has a fully-built "not matched yet" state with its own
+         honest nudge card back into matching). The FOMO modal/matching
+         animation/S11/S12/S13 sequence is left in place but now dormant
+         from this entry point, same as S14's tutorial system already was
+         -- not deleted, since re-entering matching from the dashboard
+         (see that file's "Schedule with advisor" nudge) still needs it. -->
+      <button class="btn-ghost" onclick="skipAdvisorForNow()">Skip ahead to my plan</button>
     </div>
   </div>
 
@@ -1032,8 +1044,14 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
            called when S11 renders -- it just needs to be set before then,
            which the FOMO modal still is. -->
 
-      <button class="btn-p" onclick="showPoints()">Take a step toward my plan →</button>
-      <button class="btn-ghost" onclick="showPoints()">Skip all</button>
+      <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: "convert over to the
+           dashboard after we get the questions answered.. and start the
+           dashboard introduction." Both buttons now call
+           skipAdvisorForNow() directly -- straight to the dashboard and
+           its tutorial, advisor-matching deferred to a nudge there
+           instead of continuing into showPoints()'s FOMO modal here. -->
+      <button class="btn-p" onclick="skipAdvisorForNow()">Take a step toward my plan →</button>
+      <button class="btn-ghost" onclick="skipAdvisorForNow()">Skip all</button>
     </div>
   </div>
 
