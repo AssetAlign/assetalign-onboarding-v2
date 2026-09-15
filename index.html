@@ -934,7 +934,14 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
              mechanically unchanged, still steps 3→4→5 in that order, and
              S12 still carries the real skipAdvisorForNow() off-ramp for
              anyone who doesn't want to schedule. -->
-        <div class="next-step-row" style="border:2px solid #c8a84b;"><div class="nsa">3</div><div><div style="font-size:13px;font-weight:500;color:#1a3a5c;">Build your Financial Passport</div><div style="font-size:11px;color:#666;margin-top:1px;">A few quick answers — skip any you want</div></div></div>
+        <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: "do we need to introduce
+             the passport a little bit before or during 'You've taken the
+             first step'.. your information so we can tailor your
+             financial operating system." Went with "during" — enriched
+             this row's own sub-copy rather than adding a new paragraph
+             elsewhere on the screen, keeping the explanation attached to
+             the actual step it's about. -->
+        <div class="next-step-row" style="border:2px solid #c8a84b;"><div class="nsa">3</div><div><div style="font-size:13px;font-weight:500;color:#1a3a5c;">Build your Financial Passport</div><div style="font-size:11px;color:#666;margin-top:1px;">Your info, so we can tailor your financial operating system to you — skip any you want</div></div></div>
         <div class="next-step-row"><div class="nsu">4</div><div><div style="font-size:13px;font-weight:500;color:#1a1a1a;">See your advisor match</div><div style="font-size:11px;color:#666;margin-top:1px;">We'll show you who you'd work with — scheduling is optional</div></div></div>
         <div class="next-step-row"><div class="nsu">5</div><div><div style="font-size:13px;font-weight:500;color:#1a1a1a;">Your dashboard</div><div style="font-size:11px;color:#666;margin-top:1px;">Everything in one place, organized — earning credits as you go</div></div></div>
       </div>
@@ -968,18 +975,19 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
       <div style="font-size:12px;color:#666;margin-bottom:1.25rem;line-height:1.6;">A few quick answers build out your Passport and shape your match. Skip any you prefer — you can always answer later.</div>
       <div id="qContainer"></div>
 
-      <!-- 2026-09-06, per Alex: moved out of the advisor-match screen (S11)
-           and into the questions section — it's an input that shapes the
-           match, so it belongs with the other matching questions, not
-           tucked into the result screen. -->
-      <div style="background:#f5f5f3;border-radius:10px;padding:12px 14px;margin:0 0 1.25rem;">
-        <div style="font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:2px;">Do you have a location preference?</div>
-        <div style="font-size:11px;color:#666;margin-bottom:10px;">Most people are happy meeting virtually, and your first session is a virtual call either way — this is just about whether you'd also like someone local to you.</div>
-        <div class="filter-bar" style="margin-bottom:0;">
-          <button class="filter-btn active" id="fmtVirtualBtn" onclick="selectMeetingFormat(false)">No preference</button>
-          <button class="filter-btn" id="fmtInPersonBtn" onclick="selectMeetingFormat(true)">📍 Someone local</button>
-        </div>
-      </div>
+      <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: "'Do you have a location
+           preference' doesn't really fit -- we haven't even really
+           started the plan or advisor conversation yet." Correct: this
+           screen is now framed as building your Financial Passport, not
+           the advisor/session conversation, so asking about meeting
+           location here is a narrative mismatch. Moved to the #sPoints
+           FOMO modal below (between this screen and the matching
+           animation) -- the first point in the flow that actually
+           introduces "we'll show you your match"/session language.
+           Mechanically safe to move: inPersonPreferred (set by
+           selectMeetingFormat()) is only ever read in pickPrimaryAdvisor(),
+           called when S11 renders -- it just needs to be set before then,
+           which the FOMO modal still is. -->
 
       <button class="btn-p" onclick="showPoints()">Take a step toward my plan →</button>
       <button class="btn-ghost" onclick="showPoints()">Skip all</button>
@@ -2369,7 +2377,8 @@ function obDeclineDisclosure(){
 // filter already reads, just asked as a real question instead of an
 // after-the-fact escape hatch).
 let inPersonPreferred = false;
-// 2026-09-06 — asked in S9 now, before the match is even computed, so there's
+// 2026-09-06 — asked before the match is computed (2026-09-15: moved from
+// S9 into the #sPoints FOMO modal, still before matching), so there's
 // no live advisor card to re-render here. go(11) (line ~1090) already calls
 // renderPrimaryAdvisor() fresh every time that screen is shown, which is
 // where inPersonPreferred actually takes effect (see pickPrimaryAdvisor()
@@ -3180,6 +3189,21 @@ window.addEventListener('message', function(e){
          fact somewhere besides S6 -- this is a natural second spot for
          it, right before the match reveal. -->
     <p class="sp-match-note">Get a real plan from one of the vetted advisors in our network — completely free, since your employer already covered it.</p>
+
+    <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: moved here from S9 (see that
+         screen's own dev note) — this is the first point in the flow that
+         actually talks about a session/match, so it's the right spot for
+         a session-logistics question. Same selectMeetingFormat() function,
+         same inPersonPreferred flag — only the location moved. -->
+    <div style="background:#f5f5f3;border-radius:10px;padding:12px 14px;margin:0 0 1.25rem;text-align:left;">
+      <div style="font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:2px;">Any location preference for your session?</div>
+      <div style="font-size:11px;color:#666;margin-bottom:10px;">Most people are happy meeting virtually, and your first session is a virtual call either way — this is just about whether you'd also like someone local to you.</div>
+      <div class="filter-bar" style="margin-bottom:0;">
+        <button class="filter-btn active" id="fmtVirtualBtn" onclick="selectMeetingFormat(false)">No preference</button>
+        <button class="filter-btn" id="fmtInPersonBtn" onclick="selectMeetingFormat(true)">📍 Someone local</button>
+      </div>
+    </div>
+
     <button class="sp-btn" onclick="continuePoints()">See my match →</button>
   </div>
 </div>
