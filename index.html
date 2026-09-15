@@ -567,7 +567,15 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
            Work" 3-box, folded into the existing credits sentence rather
            than a new paragraph/screen, matching the standing "don't
            overload S1" constraint from earlier this same session. -->
-      <p style="font-size:12px;color:#1a1a1a;margin-bottom:4px;"><strong style="color:#1a3a5c;">First things first: it starts with a good plan</strong> — getting organized is how you get there. AssetAlign brings everything into one place, and rewards every healthy step with Align Credits, each worth a real $1 toward advice, insurance, tax prep, and more. <span id="s1InfoLoadedNote">Your info's already loaded — take the next 2 minutes to change your financial future.</span></p>
+      <!-- SKUNKWORKS V2 — 2026-09-15, per Alex, reviewing S11's new house
+           analogy: "do we want to give them a comparison so they can
+           relate.. like just like building a house, you have to start
+           with a plan.. on the first screen?" Swapped into the existing
+           "first things first" clause in place of the more abstract "it
+           starts with a good plan" — same length, same spot, just a
+           concrete image instead of an abstract claim. Now the same
+           analogy anchors both S1 and S11. -->
+      <p style="font-size:12px;color:#1a1a1a;margin-bottom:4px;"><strong style="color:#1a3a5c;">First things first: just like building a house, you can't start without a plan</strong> — getting organized is how you get there. AssetAlign brings everything into one place, and rewards every healthy step with Align Credits, each worth a real $1 toward advice, insurance, tax prep, and more. <span id="s1InfoLoadedNote">Your info's already loaded — take the next 2 minutes to change your financial future.</span></p>
       <p id="s1EmployerNote" style="font-size:11px;color:#aaa;margin-bottom:0;">Your plan is already covered by your employer — it's completely up to you whether you choose to work with an advisor. Your employer never sees your information.</p>
       <button class="btn-p" onclick="go(2)">Verify My Info &amp; Get Started →</button>
       <!-- SKUNKWORKS -- 2026-09-13, final word on this line's several
@@ -732,7 +740,18 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
            as "here's why this matters later," not "here's what you must
            book right now." Mechanically unchanged — go(7) still fires
            next, buildChart() still renders on n===6. -->
-      <div style="font-size:14px;font-weight:500;color:#1a3a5c;text-align:center;margin-bottom:0.6rem;">Now that we know you want to <span id="s6GoalPhrase">reach your goal</span>, here's the honest starting point: you can't make real progress on anything until you can actually see where you stand.</div>
+      <!-- SKUNKWORKS V2 — 2026-09-15, per Alex ("way too wordy... just
+           have the hero header be 'You can't make real progress'"): cut
+           the "Now that we know you want to <goal>, here's the honest
+           starting point:" preamble entirely — this drops the
+           s6GoalPhrase personalization touch on this specific line (the
+           span below is now unused; go()'s n===6 branch that populates it
+           is left as a harmless no-op rather than ripped out, since it's
+           null-checked and touches nothing else). Worth knowing: the goal
+           is still personalized elsewhere on this same screen via
+           s6EmployerBadge and the neighbor/chart copy isn't goal-specific
+           anyway, so nothing critical is lost. -->
+      <div style="font-size:14px;font-weight:500;color:#1a3a5c;text-align:center;margin-bottom:0.6rem;">You can't make real progress on anything until you can actually see where you stand.</div>
       <!-- SKUNKWORKS V2 — rebalance, 2026-09-15, per Alex: "the main things
            we want to not lose are the financial plan helps act as the
            north star for everything.. but at the same time striking a
@@ -755,7 +774,12 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
            the concrete image this screen needs), the redundant "most
            people don't have one / no one's shown them" close is dropped
            since S1 already covers that ground. -->
-      <div style="font-size:13px;color:#666;margin-bottom:1.1rem;line-height:1.6;">Right now, that picture is probably scattered across a bank account, a 401(k) or two, a mortgage, insurance, a credit card — a dozen logins, no single view. Getting it organized, earning Align Credits as you go, is how you get to the real destination: a plan — less a document, more a decision-making engine, telling you the right move at each fork in the road.</div>
+      <!-- SKUNKWORKS V2 — 2026-09-15, per Alex ("concise up the 'Right
+           now' [paragraph]"): trimmed the qualifiers ("or two, if you've
+           changed jobs" etc.) and folded "less a document, more a
+           decision-making engine" into a single appositive instead of its
+           own clause. -->
+      <div style="font-size:13px;color:#666;margin-bottom:1.1rem;line-height:1.6;">Right now, that's probably scattered across a bank, a 401(k), a mortgage, insurance, a credit card — a dozen logins, no single view. Organizing it, earning credits as you go, is how you get to a real plan — your decision-making engine for every fork in the road.</div>
       <div style="font-size:15px;font-weight:500;color:#1a1a1a;margin-bottom:6px;">Here's why that view ends up mattering more than it seems.</div>
       <div style="font-size:13px;color:#666;margin-bottom:1rem;line-height:1.6;">Meet your neighbor: same street, same income, same mortgage, same expenses. Exact same financial situation — with one difference: a plan from a financial professional pointing them in the right direction.</div>
       <div class="neighbor-intro">
