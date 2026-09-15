@@ -1529,11 +1529,16 @@ function initFromFinch(){
   // Skipped for the FOMO modal itself: someone arriving this way already
   // decided to get matched, so its "most people stop here" urgency copy
   // would be nonsensical, not motivating.
-  // inPersonPreferred is left at its default (false/no preference) since
-  // aaExternalHref() doesn't carry that field — a real gap, not solved
-  // here (flagged, not a silent gap).
+  // 2026-09-15 follow-up: the inPersonPreferred gap flagged above is now
+  // closed — dashboard-replica's new advisor-intro modal asks this same
+  // question itself and forwards it as ?local=1/0 (not carried by
+  // aaExternalHref(), which doesn't know this field, so that modal appends
+  // it manually — see its own dev note). Defaults to false/no preference
+  // when absent (e.g. arriving via the plain "not matched yet" nudge card,
+  // which doesn't ask this question at all).
   if (isRematch) {
     if (priorityLabels[urlParams.get('goal')]) selectedPriority = urlParams.get('goal');
+    if (urlParams.get('local') === '1') inPersonPreferred = true;
     startMatching();
     return;
   }
