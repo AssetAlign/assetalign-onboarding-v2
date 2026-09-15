@@ -3104,13 +3104,26 @@ window.addEventListener('message', function(e){
 });
 </script>
 <!-- ════ POINTS HIGHLIGHT (between questions s9 and advisor match s10) ════ -->
+<!-- SKUNKWORKS V2 — 2026-09-15, per Alex reviewing this modal live: "i
+     think this may be where we lose people.. we are re positioning..
+     shifting the language away from the advisor heavy language.. i don't
+     want people to stop [and not] click here." Both sp-explain and the
+     button used to presuppose booking a meeting as the settled next step
+     ("find a time that works for you both" / "Find a time that works →")
+     -- that now contradicts S11's new two-equal-paths choice (schedule
+     now vs. save my plan for later), which the user hasn't made yet at
+     this point in the flow. Kept sp-fomo untouched -- it's the real hook
+     here, and it isn't advisor-language at all. Reworded sp-explain to
+     preview the actual choice honestly instead of assuming scheduling,
+     lightened sp-match-note, and relabeled the button to match what
+     actually happens next (you see your match, you don't book yet). -->
 <div id="sPoints">
   <div class="sp-inner card">
     <div style="font-size:15px;font-weight:500;color:#1a1a1a;margin-bottom:10px;">You're almost there!</div>
     <p class="sp-fomo">This is the exact spot where most people stop — they mean to come back, and the financial stress just stays. <b>The old you would’ve closed this tab. Not today.</b></p>
-    <p class="sp-explain">Next, we’ll match you with a financial professional and find a time that works for you both — just a few seconds. The session itself happens later, whenever works for you.</p>
-    <p class="sp-match-note">We want to make sure we match you with exactly the right advisor for your situation — not just anyone available.</p>
-    <button class="sp-btn" onclick="continuePoints()">Find a time that works →</button>
+    <p class="sp-explain">Next, we’ll show you your match. From there, it’s up to you — book your free plan session, or save it for later and keep going.</p>
+    <p class="sp-match-note">We match you carefully — not just whoever's available.</p>
+    <button class="sp-btn" onclick="continuePoints()">See my match →</button>
   </div>
 </div>
 
