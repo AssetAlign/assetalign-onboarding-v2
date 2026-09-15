@@ -934,7 +934,7 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
              mechanically unchanged, still steps 3→4→5 in that order, and
              S12 still carries the real skipAdvisorForNow() off-ramp for
              anyone who doesn't want to schedule. -->
-        <div class="next-step-row" style="border:2px solid #c8a84b;"><div class="nsa">3</div><div><div style="font-size:13px;font-weight:500;color:#1a3a5c;">A few quick questions</div><div style="font-size:11px;color:#666;margin-top:1px;">Help us finish your picture — skip any you want</div></div></div>
+        <div class="next-step-row" style="border:2px solid #c8a84b;"><div class="nsa">3</div><div><div style="font-size:13px;font-weight:500;color:#1a3a5c;">Build your Financial Passport</div><div style="font-size:11px;color:#666;margin-top:1px;">A few quick answers — skip any you want</div></div></div>
         <div class="next-step-row"><div class="nsu">4</div><div><div style="font-size:13px;font-weight:500;color:#1a1a1a;">See your advisor match</div><div style="font-size:11px;color:#666;margin-top:1px;">We'll show you who you'd work with — scheduling is optional</div></div></div>
         <div class="next-step-row"><div class="nsu">5</div><div><div style="font-size:13px;font-weight:500;color:#1a1a1a;">Your dashboard</div><div style="font-size:11px;color:#666;margin-top:1px;">Everything in one place, organized — earning credits as you go</div></div></div>
       </div>
@@ -955,10 +955,17 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
        S9 — QUESTIONS
   ───────────────────────────────────────────── -->
   <div class="screen" id="s9">
-    <div class="nav-row"><button class="back" onclick="go(8)">← Back</button><span class="step-ct">Section 2 — Questions</span></div>
+    <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: rather than new dedicated
+         screens to introduce "My Financial Passport"/"My Financial Plan",
+         integrate them into this existing step. This screen already
+         collects passport-type data (income, home ownership, emergency
+         fund, retirement status) -- it just wasn't named as such. Renamed
+         the section label and heading to introduce the Passport here
+         explicitly; the individual question fields below are unchanged. -->
+    <div class="nav-row"><button class="back" onclick="go(8)">← Back</button><span class="step-ct">Section 2 — Your Passport</span></div>
     <div class="card">
-      <div style="font-size:15px;font-weight:500;color:#1a1a1a;margin-bottom:4px;">A few quick questions</div>
-      <div style="font-size:12px;color:#666;margin-bottom:1.25rem;line-height:1.6;">These help us match you with the right advisor. Skip any you prefer — you can always answer later.</div>
+      <div style="font-size:15px;font-weight:500;color:#1a1a1a;margin-bottom:4px;">Your Financial Passport starts here</div>
+      <div style="font-size:12px;color:#666;margin-bottom:1.25rem;line-height:1.6;">A few quick answers build out your Passport and shape your match. Skip any you prefer — you can always answer later.</div>
       <div id="qContainer"></div>
 
       <!-- 2026-09-06, per Alex: moved out of the advisor-match screen (S11)
@@ -1034,7 +1041,10 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
            sales meeting to sign up for — added above the scheduling widget
            itself, same "soft-land" register as the rest of the advisor
            copy established earlier this session. -->
-      <div style="font-size:13px;color:#666;margin-bottom:1.25rem;line-height:1.6;">This is about getting your financial plan moving — nothing to sign, nothing to commit to. <span id="schedAdvisorFirst">Your advisor</span> already has your goals, so this takes just a few seconds.</div>
+      <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: name "My Financial Plan"
+           consistently at this last real naming point in the flow, same
+           as S11 above. -->
+      <div style="font-size:13px;color:#666;margin-bottom:1.25rem;line-height:1.6;">This is about getting My Financial Plan moving — nothing to sign, nothing to commit to. <span id="schedAdvisorFirst">Your advisor</span> already has your goals, so this takes just a few seconds.</div>
 
       <!-- SKUNKWORKS — real off-ramp, 2026-09-11, per Alex: "is there a
            way we are going to let people skip the whole advisor thing?..
@@ -1751,7 +1761,7 @@ const allQuestions = {
 const sectionMap = {
   1:'Section 1 — Setup', 2:'Section 1 — Setup', 3:'Section 1 — Setup',
   4:'Section 1 — Setup', 5:'Section 1 — Setup', 6:'Section 1 — Setup',
-  7:'Section 1 — Setup', 8:'Section 1 complete', 9:'Section 2 — Questions',
+  7:'Section 1 — Setup', 8:'Section 1 complete', 9:'Section 2 — Your Passport',
   10:'Section 3 — Matching', 11:'Section 3 — Your Match',
   12:'Section 3 — Schedule', 13:'Section 3 — Match', 14:'Complete!'
 };
@@ -2077,8 +2087,12 @@ function renderPrimaryAdvisor(){
 
   card.innerHTML = `
     <div style="background:#f5f5f3;border-radius:10px;padding:12px 14px;margin-bottom:1rem;">
+      <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: name "My Financial Plan"
+           as a proper concept here (parallel to Financial Passport/Align
+           Credits), rather than generic "a plan" — this is its main
+           introduction point in the flow. -->
       <div style="font-size:13px;font-weight:600;color:#1a3a5c;margin-bottom:4px;">Just like a house, you can't build one without a plan — that's why we start here.</div>
-      <div style="font-size:12px;color:#666;line-height:1.5;">Every advisor in our network is a vetted, independent fiduciary. Building your plan is completely free — ${employerDisplay} already covered it.</div>
+      <div style="font-size:12px;color:#666;line-height:1.5;">Every advisor in our network is a vetted, independent fiduciary. Building My Financial Plan is completely free — ${employerDisplay} already covered it.</div>
     </div>
 
     <div style="font-size:11px;font-weight:500;color:#3b6d11;background:#eaf3de;display:inline-block;padding:3px 10px;border-radius:99px;margin-bottom:1rem;">Match found</div>
@@ -2134,13 +2148,13 @@ function renderPrimaryAdvisor(){
          same choice earlier. -->
     <div style="display:flex;flex-direction:column;gap:10px;margin-top:0.75rem;">
       <div style="border:2px solid #1a3a5c;border-radius:10px;padding:14px 16px;">
-        <div style="font-size:13px;font-weight:600;color:#1a3a5c;margin-bottom:3px;">Get your plan now</div>
+        <div style="font-size:13px;font-weight:600;color:#1a3a5c;margin-bottom:3px;">Get My Financial Plan now</div>
         <div style="font-size:11.5px;color:#666;margin-bottom:10px;line-height:1.5;">Free — ${employerDisplay} already covered it. No commitment beyond the conversation.</div>
         <button class="btn-p" style="margin-top:0;" onclick="goToSchedule(schedulingAdvisor)">Schedule my 30-minute plan session →</button>
       </div>
       <div style="border:2px solid #ddd;border-radius:10px;padding:14px 16px;">
-        <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:3px;">Save my plan for later</div>
-        <div style="font-size:11.5px;color:#666;margin-bottom:10px;line-height:1.5;">Get everything organized first — come back for your plan whenever you're ready.</div>
+        <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:3px;">Save My Financial Plan for later</div>
+        <div style="font-size:11.5px;color:#666;margin-bottom:10px;line-height:1.5;">Get everything organized first — come back for it whenever you're ready.</div>
         <button class="btn-o" style="margin-top:0;" onclick="skipAdvisorForNow()">Save my plan for later →</button>
       </div>
     </div>
