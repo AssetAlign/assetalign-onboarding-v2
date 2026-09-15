@@ -2005,7 +2005,23 @@ function renderPrimaryAdvisor(){
       : '<span class="format-badge format-inperson">📍 Local</span>'
   ).join('');
 
+  // SKUNKWORKS V2 — reframe, 2026-09-15, per Alex reviewing this screen
+  // live: lead with the free-plan-from-network value prop (a real
+  // fiduciary, no cost, employer already covered it) and the "why we
+  // start here" framing using a new analogy — "just like a house, you
+  // can't build one without a plan" — instead of restating the
+  // decision-engine language S6/S7 already used. Employer name reuses the
+  // same urlParams/finchProfile fallback chain the real handoff params
+  // use elsewhere in this file (see buildBaseHandoffParams' own
+  // employerDisplay logic), not a new lookup.
+  const employerDisplay = urlParams.get('employer_name') || finchProfile.employer_name || 'your employer';
+
   card.innerHTML = `
+    <div style="background:#f5f5f3;border-radius:10px;padding:12px 14px;margin-bottom:1rem;">
+      <div style="font-size:13px;font-weight:600;color:#1a3a5c;margin-bottom:4px;">Just like a house, you can't build one without a plan — that's why we start here.</div>
+      <div style="font-size:12px;color:#666;line-height:1.5;">Every advisor in our network is a vetted, independent fiduciary. Building your plan is completely free — ${employerDisplay} already covered it.</div>
+    </div>
+
     <div style="font-size:11px;font-weight:500;color:#3b6d11;background:#eaf3de;display:inline-block;padding:3px 10px;border-radius:99px;margin-bottom:1rem;">Match found</div>
     ${matchReasonNote}
 
@@ -2044,9 +2060,33 @@ function renderPrimaryAdvisor(){
 
     <hr class="divider">
 
-    <button class="btn-p btn-p-lg" onclick="goToSchedule(schedulingAdvisor)">Schedule my 30-minute plan session →</button>
+    <!-- SKUNKWORKS V2 — reframe, 2026-09-15, per Alex: "i think we can give
+         an off ramp... a bigger one than before... like a save my plan for
+         later.. lets get everything organized first.. two equal paths."
+         The only off-ramp before this lived on S12 (skipAdvisorForNow(),
+         added 2026-09-11) as a small "not ready?" note right before
+         scheduling — real, but easy to miss and visually secondary to
+         booking. This puts the same real off-ramp function right here,
+         at the actual decision moment, styled as a genuine equal
+         alternative (same border weight, same padding, own heading) next
+         to scheduling, not a footnote below it. S12's own off-ramp note
+         is left in place for anyone who reaches it a different way (back
+         button, direct link) — this doesn't replace it, just surfaces the
+         same choice earlier. -->
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:0.75rem;">
+      <div style="border:2px solid #1a3a5c;border-radius:10px;padding:14px 16px;">
+        <div style="font-size:13px;font-weight:600;color:#1a3a5c;margin-bottom:3px;">Get your plan now</div>
+        <div style="font-size:11.5px;color:#666;margin-bottom:10px;line-height:1.5;">Free — ${employerDisplay} already covered it. No commitment beyond the conversation.</div>
+        <button class="btn-p" style="margin-top:0;" onclick="goToSchedule(schedulingAdvisor)">Schedule my 30-minute plan session →</button>
+      </div>
+      <div style="border:2px solid #ddd;border-radius:10px;padding:14px 16px;">
+        <div style="font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:3px;">Save my plan for later</div>
+        <div style="font-size:11.5px;color:#666;margin-bottom:10px;line-height:1.5;">Get everything organized first — come back for your plan whenever you're ready.</div>
+        <button class="btn-o" style="margin-top:0;" onclick="skipAdvisorForNow()">Save my plan for later →</button>
+      </div>
+    </div>
 
-    <div class="other-options-section">
+    <div class="other-options-section" style="margin-top:14px;">
       <div class="other-options-title">Not the right fit?</div>
       <button class="btn-o btn-o-solid btn-o-sm" onclick="go(13)" style="margin-top:0;">See more advisor options →</button>
     </div>
