@@ -1458,6 +1458,18 @@ const isGift = urlParams.get('gift') === '1';
 // overrides (below) to show a clearly-fake sample identity.
 const isDemo = urlParams.get('demo') === '1';
 const giftFromName = (urlParams.get('from') || '').trim();
+
+// SKUNKWORKS V2 — 2026-09-15, per Alex: dashboard's "not matched yet"
+// nudge (session.advisor_skipped) links back here so someone who took the
+// organize-first path can get matched with an advisor later. This file is
+// documented above (see aaIsPersistentMode's dev note) as "a one-time
+// linear flow, not something to reload mid-stream" — deliberately not
+// built to resume mid-S9. Rather than fight that, ?rematch=1 skips the
+// wizard entirely and re-seeds just what matching actually needs
+// (selectedPriority from ?goal=) instead of requiring S1-S9 to be
+// re-clicked through. See initFromFinch()'s own early-return branch below
+// for where this actually fires.
+const isRematch = urlParams.get('rematch') === '1';
 // SKUNKWORKS -- real fix, 2026-09-13, per Alex, testing his own personal
 // instance: he manually corrected S2's name field to his real name, then
 // asked "why isn't it pulling that data and using that across the entire
@@ -1507,6 +1519,24 @@ const finchProfile = {
 };
 
 function initFromFinch(){
+  // SKUNKWORKS V2 — 2026-09-15: rematch mode (see isRematch's own dev note
+  // above) skips the wizard entirely instead of trying to resume mid-S9,
+  // which this file was never built to do. Seeds selectedPriority from
+  // ?goal= (falls back to the file's existing 'home' default if missing
+  // or unrecognized) and jumps straight to the matching animation —
+  // startMatching() already exists for the FOMO modal's "See my match"
+  // button and does everything needed here too (go(10) + runMatchAnimation()).
+  // Skipped for the FOMO modal itself: someone arriving this way already
+  // decided to get matched, so its "most people stop here" urgency copy
+  // would be nonsensical, not motivating.
+  // inPersonPreferred is left at its default (false/no preference) since
+  // aaExternalHref() doesn't carry that field — a real gap, not solved
+  // here (flagged, not a silent gap).
+  if (isRematch) {
+    if (priorityLabels[urlParams.get('goal')]) selectedPriority = urlParams.get('goal');
+    startMatching();
+    return;
+  }
   // DEMO MODE toggles (banner label + S2 census/API callout) run regardless
   // of gift vs. employer flow — see isDemo dev note above.
   if (isDemo) {
