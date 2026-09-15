@@ -807,13 +807,24 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
         <div style="font-size:13px;color:#3b6d11;font-weight:500;">That gap is <span id="diffDisplay">—</span>.</div>
         <div style="font-size:12px;color:#3b6d11;margin-top:3px;">Closing it starts with the next 5 minutes — right here.</div>
       </div>
+      <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: "i wonder if we want to
+           marry the $0 because its covered by your employer and the plan
+           part." Previously the plan sentence and the price reveal read
+           as two disconnected beats in the same box (plan description,
+           then a separate "Available whenever..." line, then the price
+           strike-through with no textual bridge into it). Added a direct
+           bridge phrase ("here's what that's really worth:") so the
+           visual $0 reveal reads as the sentence's own payoff, and moved
+           the "no pressure" reassurance to after the reveal instead of
+           before it, so it closes the thought rather than interrupting
+           the plan → price connection. -->
       <div class="covered-row">
-        <div style="font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:2px;">Once you're organized, a complimentary plan from a vetted, independent fiduciary turns that picture into your actual game plan.</div>
-        <div style="font-size:11px;color:#999;margin-bottom:10px;">Available whenever you want it. Nothing to commit to today.</div>
+        <div style="font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:10px;">Once you're organized, a complimentary plan from a vetted, independent fiduciary turns that picture into your actual game plan — here's what that's really worth:</div>
         <div style="font-size:12px;color:#999;margin-bottom:2px;">Typically costs</div>
         <div class="price-strike" style="font-size:15px;margin-bottom:10px;">$2,500 – $3,500</div>
         <div style="font-size:30px;font-weight:700;color:#27500a;line-height:1;">$0</div>
         <div id="s6EmployerBadge" style="background:#eaf3de;color:#27500a;font-size:11px;font-weight:500;padding:3px 10px;border-radius:99px;margin-top:8px;display:inline-block;">Covered by your employer</div>
+        <div style="font-size:11px;color:#999;margin-top:10px;">Available whenever you want it. Nothing to commit to today.</div>
       </div>
       <div style="font-size:15px;font-weight:500;color:#1a3a5c;text-align:center;margin:0.75rem 0 0.5rem;">The difference isn’t luck. It’s a real plan pointing every decision the same direction — and getting organized is how you get there.</div>
       <button class="btn-p" onclick="go(7)">Continue →</button>
@@ -926,7 +937,10 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
         <div style="font-size:16px;font-weight:500;color:#1a3a5c;">25 Align Credits</div>
       </div>
       <button class="btn-p" onclick="buildAndGoQuestions()">Answer a few quick questions →</button>
-      <button class="btn-ghost" onclick="showPoints()">Skip to my advisor match</button>
+      <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: de-emphasize "advisor
+         match" language throughout S8-S10, same "plan" flavor as the rest
+         of the redesign. Function calls unchanged (still showPoints()/etc). -->
+      <button class="btn-ghost" onclick="showPoints()">Skip ahead to my plan</button>
     </div>
   </div>
 
@@ -954,7 +968,7 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
         </div>
       </div>
 
-      <button class="btn-p" onclick="showPoints()">Find my advisor match →</button>
+      <button class="btn-p" onclick="showPoints()">Take a step toward my plan →</button>
       <button class="btn-ghost" onclick="showPoints()">Skip all</button>
     </div>
   </div>
@@ -967,15 +981,22 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
     <div class="card">
       <div style="text-align:center;padding:2rem 1rem 1rem;">
         <div class="spinner-ring" id="spinner"></div>
-        <div style="font-size:15px;font-weight:500;color:#1a1a1a;margin-bottom:6px;" id="loadingTitle">Finding your match...</div>
-        <div style="font-size:13px;color:#666;" id="loadingSub">We're running your profile against our advisor network right now.</div>
+        <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: "same thing with Finding
+             your match on the loading screen etc... let's de-emphasize."
+             Reworded the title/sub and the advisor-heavy steps (ct3, ct5)
+             to lead with "plan" instead of "match" — ct1/ct2/ct4 were
+             already fairly neutral so left alone. The JS that overwrites
+             loadingTitle/loadingSub at the end of this animation (below,
+             search "Your plan is ready to start") was updated to match. -->
+        <div style="font-size:15px;font-weight:500;color:#1a1a1a;margin-bottom:6px;" id="loadingTitle">Getting your plan moving...</div>
+        <div style="font-size:13px;color:#666;" id="loadingSub">We're lining up the right fiduciary to help build your plan.</div>
       </div>
       <div class="calc-steps">
         <div class="calc-step"><div class="calc-icon ci-pending" id="ci1">1</div><span id="ct1" style="color:#aaa;">Reviewing your financial priorities</span></div>
-        <div class="calc-step"><div class="calc-icon ci-pending" id="ci2">2</div><span id="ct2" style="color:#aaa;">Matching your goal — <span id="goalLabel">home buying</span></span></div>
-        <div class="calc-step"><div class="calc-icon ci-pending" id="ci3">3</div><span id="ct3" style="color:#aaa;">Finding advisors who work with clients just like you</span></div>
-        <div class="calc-step"><div class="calc-icon ci-pending" id="ci4">4</div><span id="ct4" style="color:#aaa;">Ranking your top matches by fit</span></div>
-        <div class="calc-step"><div class="calc-icon ci-pending" id="ci5">5</div><span id="ct5" style="color:#aaa;">Your match is ready</span></div>
+        <div class="calc-step"><div class="calc-icon ci-pending" id="ci2">2</div><span id="ct2" style="color:#aaa;">Confirming your goal — <span id="goalLabel">home buying</span></span></div>
+        <div class="calc-step"><div class="calc-icon ci-pending" id="ci3">3</div><span id="ct3" style="color:#aaa;">Finding the right fit for your plan</span></div>
+        <div class="calc-step"><div class="calc-icon ci-pending" id="ci4">4</div><span id="ct4" style="color:#aaa;">Narrowing down your best options</span></div>
+        <div class="calc-step"><div class="calc-icon ci-pending" id="ci5">5</div><span id="ct5" style="color:#aaa;">Your plan is ready to start</span></div>
       </div>
     </div>
   </div>
@@ -2556,8 +2577,8 @@ function runMatchAnimation(){
     const last=document.getElementById('ci5');
     last.className='calc-icon ci-done'; last.textContent='✓';
     document.getElementById('spinner').style.borderTopColor='#3b6d11';
-    document.getElementById('loadingTitle').textContent='Your match is ready.';
-    document.getElementById('loadingSub').textContent='We found someone who specializes in clients just like you.';
+    document.getElementById('loadingTitle').textContent='Your plan is ready to start.';
+    document.getElementById('loadingSub').textContent='We found the right fiduciary to help build your plan.';
     setTimeout(()=>go(11),900);
   },5000);
 }
