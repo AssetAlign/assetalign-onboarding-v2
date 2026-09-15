@@ -582,7 +582,20 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
            concrete image instead of an abstract claim. Now the same
            analogy anchors both S1 and S11. -->
       <p style="font-size:12px;color:#1a1a1a;margin-bottom:4px;"><strong style="color:#1a3a5c;">First things first: just like building a house, you can't start without a plan</strong> — getting organized is how you get there. AssetAlign brings everything into one place, and rewards every healthy step with Align Credits, each worth a real $1 toward advice, insurance, tax prep, and more. <span id="s1InfoLoadedNote">Your info's already loaded — take the next 2 minutes to change your financial future.</span></p>
-      <p id="s1EmployerNote" style="font-size:11px;color:#aaa;margin-bottom:0;">Your plan is already covered by your employer — it's completely up to you whether you choose to work with an advisor. Your employer never sees your information.</p>
+      <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: "what about the positioning
+           more up top.. normally to get a plan from a financial advisor
+           would cost X.... but ACME has you covered.. should be more up
+           top." This price-contrast fact already existed on S6 as a
+           whole visual block ($2,500-$3,500 struck through -> $0), but on
+           S1 it was buried in muted gray footnote text with no number
+           attached. Elevated it to its own colored callout, same price
+           range as S6 for consistency, replacing the muted disclaimer
+           rather than adding a new paragraph. The "up to you / employer
+           never sees info" reassurance moved to a smaller line below it
+           instead of disappearing. initGiftMode() below also overrides
+           this new element for gift-mode users (no employer to credit). -->
+      <div id="s1PriceCallout" style="font-size:13px;font-weight:600;color:#27500a;background:#eaf3de;border-radius:8px;padding:8px 12px;margin-bottom:6px;">A plan like this normally runs $2,500–$3,500. Your employer's got you covered — $0 to you.</div>
+      <p id="s1EmployerNote" style="font-size:11px;color:#aaa;margin-bottom:0;">Completely up to you whether you choose to work with an advisor. Your employer never sees your information.</p>
       <button class="btn-p" onclick="go(2)">Verify My Info &amp; Get Started →</button>
       <!-- SKUNKWORKS -- 2026-09-13, final word on this line's several
            rounds of back-and-forth: after briefly removing/restoring the
@@ -1550,6 +1563,12 @@ function initGiftMode(){
 
   const s1intro = document.getElementById('s1IntroLine');
   if (s1intro) s1intro.innerHTML = '<strong>' + displayFrom + '</strong> thought you\'d want this too — a complimentary financial plan, no employer required.';
+  // SKUNKWORKS V2 — 2026-09-15: new S1 price callout (see that element's
+  // own dev note) says "Your employer's got you covered" — wrong for a
+  // gift-mode enrollee, who has no employer in this picture at all.
+  // Same price contrast, no employer credit.
+  const s1price = document.getElementById('s1PriceCallout');
+  if (s1price) s1price.textContent = 'A plan like this normally runs $2,500–$3,500 — yours is completely free.';
   const s1note = document.getElementById('s1EmployerNote');
   if (s1note) s1note.textContent = 'This is completely free, with no obligation to work with an advisor. Nothing here is shared with anyone but you.';
   const s1infoNote = document.getElementById('s1InfoLoadedNote');
