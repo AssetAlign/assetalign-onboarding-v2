@@ -1258,7 +1258,15 @@ const advisorArchive = [
     name: 'Michael R. Torres',
     credentials: 'CFP®',
     initials: 'MT',
-    photo: 'https://images.unsplash.com/photo-1591818873794-ba8279c7da8a?w=200&h=200&fit=crop&crop=faces&auto=format&q=80', // stock photo — fictional demo advisor, not a real person
+    // SKUNKWORKS V2 — 2026-09-15, per Alex ("the picture is all messed
+    // up"): the photo itself loaded fine (verified directly), but Michael
+    // was the ONLY advisor in this archive with a real photo — every
+    // other entry falls back to a colored initials avatar, and his was a
+    // black-and-white stock shot, so it read as inconsistent next to
+    // everyone else rather than as a deliberate choice. Dropped to null
+    // so he matches the same colored-initials treatment as every other
+    // advisor (avatarBg/avatarColor below are already set for this).
+    photo: null,
     avatarBg: '#e6f1fb',
     avatarColor: '#1a3a5c',
     location: 'Chicago, IL', state: 'IL',
