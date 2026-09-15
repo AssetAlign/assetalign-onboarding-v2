@@ -713,7 +713,21 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
       </div>
       <div style="font-size:14px;font-weight:500;color:#1a1a1a;margin-bottom:6px;">A dollar saved is a dollar working for you.</div>
       <div style="font-size:13px;color:#666;line-height:1.6;">Small decisions matter greatly when the power of compounding is factored in. We're committed to stretching every dollar — your insurance rate, your mortgage, your monthly savings rate. Nothing slips through.</div>
-      <button class="btn-p" onclick="go(6)" style="margin-top:1rem;">Next →</button>
+      <!-- SKUNKWORKS V2 -- 2026-09-15, per Alex: "the neighbor slide.. and
+           the slide after it.. take it out of its current [spot] and put
+           it later in the flow.. when we introduce the advisor later on
+           during the dashboard." S6/S7 are entirely advisor-value-pitch
+           content (the neighbor growth chart, "what an advisor does") --
+           now that advisor-matching is a later, optional nudge rather
+           than the default onboarding path, they don't belong this early.
+           Now skips straight to S8. S6/S7's HTML/CSS/JS (buildChart(),
+           the citation, etc.) is left in place but unreachable from here
+           -- not deleted, matching this file's own established pattern
+           for retired-but-not-ripped-out flows (S14's tutorial system,
+           the testimonial #spVideo popup). Their content is being ported
+           into the dashboard's advisor-intro modal instead (separate
+           change, dashboard-replica). -->
+      <button class="btn-p" onclick="go(8)" style="margin-top:1rem;">Next →</button>
     </div>
   </div>
 
