@@ -955,7 +955,14 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
              elsewhere on the screen, keeping the explanation attached to
              the actual step it's about. -->
         <div class="next-step-row" style="border:2px solid #c8a84b;"><div class="nsa">3</div><div><div style="font-size:13px;font-weight:500;color:#1a3a5c;">Build your Financial Passport</div><div style="font-size:11px;color:#666;margin-top:1px;">Your info, so we can tailor your financial operating system to you — skip any you want</div></div></div>
-        <div class="next-step-row"><div class="nsu">4</div><div><div style="font-size:13px;font-weight:500;color:#1a1a1a;">See your advisor match</div><div style="font-size:11px;color:#666;margin-top:1px;">We'll show you who you'd work with — scheduling is optional</div></div></div>
+        <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: "i've said like 20 times
+             we are repositioning this whole advisor stuff.. you need to
+             take the same approach... and really be proactive." Correct
+             call — step 3 got renamed to Financial Passport language but
+             this row still led with "advisor match." Renamed to tie into
+             the same My Financial Plan naming used on S11/S12, since
+             that's what this step actually leads to. -->
+        <div class="next-step-row"><div class="nsu">4</div><div><div style="font-size:13px;font-weight:500;color:#1a1a1a;">Explore My Financial Plan</div><div style="font-size:11px;color:#666;margin-top:1px;">See your match, or save it for later — your call</div></div></div>
         <div class="next-step-row"><div class="nsu">5</div><div><div style="font-size:13px;font-weight:500;color:#1a1a1a;">Your dashboard</div><div style="font-size:11px;color:#666;margin-top:1px;">Everything in one place, organized — earning credits as you go</div></div></div>
       </div>
       <div style="background:#f5f5f3;border-radius:8px;padding:10px 14px;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;">
@@ -984,8 +991,16 @@ body { background: #f5f5f3; font-family: -apple-system, BlinkMacSystemFont, 'Seg
          explicitly; the individual question fields below are unchanged. -->
     <div class="nav-row"><button class="back" onclick="go(8)">← Back</button><span class="step-ct">Section 2 — Your Passport</span></div>
     <div class="card">
+      <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: the Passport got named
+           here but never explained what it actually does. His framing:
+           "we help use the mosaic of information to create a full
+           profile that can be filled out across our partners.. so you
+           can stop with all the paperwork.. most people know that they
+           need certain financial things but the paperwork and finding
+           the information is the real problem." Added that explanation
+           directly rather than leaving the name to speak for itself. -->
       <div style="font-size:15px;font-weight:500;color:#1a1a1a;margin-bottom:4px;">Your Financial Passport starts here</div>
-      <div style="font-size:12px;color:#666;margin-bottom:1.25rem;line-height:1.6;">A few quick answers build out your Passport and shape your match. Skip any you prefer — you can always answer later.</div>
+      <div style="font-size:12px;color:#666;margin-bottom:1.25rem;line-height:1.6;">Every answer becomes part of your Financial Passport — one profile our partners can reuse, so you fill out the paperwork once instead of over and over. You already know what you need; finding and repeating the information was always the real problem. Skip any you prefer — you can always answer later.</div>
       <div id="qContainer"></div>
 
       <!-- SKUNKWORKS V2 — 2026-09-15, per Alex: "'Do you have a location
